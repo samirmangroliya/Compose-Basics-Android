@@ -57,31 +57,29 @@ fun HorizontalPagerExample() {
         }
     }
 
-    Row(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(2.dp), horizontalArrangement = Arrangement.Center) {
+    Row(modifier = Modifier
+        .wrapContentHeight()
+        .fillMaxWidth()
+        .padding(2.dp), horizontalArrangement = Arrangement.Center) {
         repeat(pagerState.pageCount) { iteration ->
 
             val color = if(pagerState.currentPage == iteration) {
                 Color.DarkGray
             } else {Color.LightGray}
 
-            Box(modifier = Modifier.padding(2.dp).clip(CircleShape).background(color).size(10.dp)){
+            Box(modifier = Modifier
+                .padding(2.dp)
+                .clip(CircleShape)
+                .background(color)
+                .size(10.dp)){
 
             }
         }
     }
 
-    Row(modifier = Modifier.padding(0.dp, 10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-
-        Button(onClick = {
-            coroutineScope.launch {
-                // Call scroll to on pagerState
-                val currPage = pagerState.currentPage
-                if(currPage == 0) return@launch
-                pagerState.animateScrollToPage(currPage-1)
-            }
-        }) {
-            Text("<")
-        }
+    Row(modifier = Modifier
+        .padding(0.dp, 10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
 
         Button(onClick = {
             coroutineScope.launch {
@@ -91,23 +89,42 @@ fun HorizontalPagerExample() {
         }) {
             Text("|<")
         }
+
         Button(onClick = {
             coroutineScope.launch {
                 // Call scroll to on pagerState
-                pagerState.animateScrollToPage(9)
+                val currPage = pagerState.currentPage
+                if(currPage == 0) {
+                    pagerState.animateScrollToPage(pagerState.pageCount-1)
+                    return@launch
+                }
+                pagerState.animateScrollToPage(currPage-1)
             }
         }) {
-            Text(">|")
+            Text("<")
         }
 
         Button(onClick = {
             coroutineScope.launch {
                 // Call scroll to on pagerState
                 val currPage = pagerState.currentPage
+                if(currPage == pagerState.pageCount-1) {
+                    pagerState.animateScrollToPage(0)
+                    return@launch
+                }
                 pagerState.animateScrollToPage(currPage+1)
             }
         }) {
             Text(">")
+        }
+
+        Button(onClick = {
+            coroutineScope.launch {
+                // Call scroll to on pagerState
+                pagerState.animateScrollToPage(pagerState.pageCount-1)
+            }
+        }) {
+            Text(">|")
         }
     }
 }

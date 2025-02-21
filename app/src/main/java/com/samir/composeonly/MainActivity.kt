@@ -4,51 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.samir.composeonly.composeExample.FlowRowSimpleUsageExample
-import com.samir.composeonly.composeExample.HorizontalPagerExample
+import com.samir.composeonly.navigation.NavigationExample
 import com.samir.composeonly.ui.theme.ComposeAndroidOnlyTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ComposeAndroidOnlyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting()
+                    TopAppBar(title = {
+                        Text("Compose Example List")
+                    })
+                    NavigationExample(innerPadding)
                 }
             }
         }
     }
 }
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun Greeting() {
-
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top, modifier = Modifier.safeDrawingPadding().fillMaxSize()) {
-        HorizontalPagerExample()
-        FlowRowSimpleUsageExample()
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeAndroidOnlyTheme {
-        Greeting()
-    }
-}
-
