@@ -34,111 +34,121 @@ fun HorizontalPagerExample() {
     // scroll to page
     val coroutineScope = rememberCoroutineScope()
 
-    HorizontalPager(state = pagerState) { page ->
-        Column(
-            modifier = Modifier.fillMaxWidth()
+    Column {
+        HorizontalPager(state = pagerState) { page ->
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+
+                val color = getColor(page)
+                Text(
+                    "Page:  $page",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(200.dp)
+                        .clip(shape = RoundedCornerShape(24.dp))
+                        .background(color)
+                        .wrapContentHeight(align = Alignment.CenterVertically),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .padding(2.dp), horizontalArrangement = Arrangement.Center
+        ) {
+            repeat(pagerState.pageCount) { iteration ->
+
+                val color = if (pagerState.currentPage == iteration) {
+                    Color.DarkGray
+                } else {
+                    Color.LightGray
+                }
+
+                Box(
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(10.dp)
+                ) {
+
+                }
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .padding(0.dp, 10.dp)
+                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
-            val color = getColor(page)
-            Text(
-                "Page:  $page",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
-                    .height(200.dp)
-                    .clip(shape = RoundedCornerShape(24.dp))
-                    .background(color)
-                    .wrapContentHeight(align = Alignment.CenterVertically),
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-
-    Row(modifier = Modifier
-        .wrapContentHeight()
-        .fillMaxWidth()
-        .padding(2.dp), horizontalArrangement = Arrangement.Center) {
-        repeat(pagerState.pageCount) { iteration ->
-
-            val color = if(pagerState.currentPage == iteration) {
-                Color.DarkGray
-            } else {Color.LightGray}
-
-            Box(modifier = Modifier
-                .padding(2.dp)
-                .clip(CircleShape)
-                .background(color)
-                .size(10.dp)){
-
-            }
-        }
-    }
-
-    Row(modifier = Modifier
-        .padding(0.dp, 10.dp)
-        .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-
-        Button(onClick = {
-            coroutineScope.launch {
-                // Call scroll to on pagerState
-                pagerState.animateScrollToPage(0)
-            }
-        }) {
-            Text("|<")
-        }
-
-        Button(onClick = {
-            coroutineScope.launch {
-                // Call scroll to on pagerState
-                val currPage = pagerState.currentPage
-                if(currPage == 0) {
-                    pagerState.animateScrollToPage(pagerState.pageCount-1)
-                    return@launch
-                }
-                pagerState.animateScrollToPage(currPage-1)
-            }
-        }) {
-            Text("<")
-        }
-
-        Button(onClick = {
-            coroutineScope.launch {
-                // Call scroll to on pagerState
-                val currPage = pagerState.currentPage
-                if(currPage == pagerState.pageCount-1) {
+            Button(onClick = {
+                coroutineScope.launch {
+                    // Call scroll to on pagerState
                     pagerState.animateScrollToPage(0)
-                    return@launch
                 }
-                pagerState.animateScrollToPage(currPage+1)
+            }) {
+                Text("|<")
             }
-        }) {
-            Text(">")
-        }
 
-        Button(onClick = {
-            coroutineScope.launch {
-                // Call scroll to on pagerState
-                pagerState.animateScrollToPage(pagerState.pageCount-1)
+            Button(onClick = {
+                coroutineScope.launch {
+                    // Call scroll to on pagerState
+                    val currPage = pagerState.currentPage
+                    if (currPage == 0) {
+                        pagerState.animateScrollToPage(pagerState.pageCount - 1)
+                        return@launch
+                    }
+                    pagerState.animateScrollToPage(currPage - 1)
+                }
+            }) {
+                Text("<")
             }
-        }) {
-            Text(">|")
+
+            Button(onClick = {
+                coroutineScope.launch {
+                    // Call scroll to on pagerState
+                    val currPage = pagerState.currentPage
+                    if (currPage == pagerState.pageCount - 1) {
+                        pagerState.animateScrollToPage(0)
+                        return@launch
+                    }
+                    pagerState.animateScrollToPage(currPage + 1)
+                }
+            }) {
+                Text(">")
+            }
+
+            Button(onClick = {
+                coroutineScope.launch {
+                    // Call scroll to on pagerState
+                    pagerState.animateScrollToPage(pagerState.pageCount - 1)
+                }
+            }) {
+                Text(">|")
+            }
         }
     }
 }
 
-fun getColor(page:Int): Color {
-    return when(page) {
-        1->Color.Green
-        2->Color.Red
-        3->Color.Blue
-        4->Color.Magenta
-        5->Color.LightGray
-        6->Color.Black
-        7->Color.Cyan
-        8->Color.Gray
+fun getColor(page: Int): Color {
+    return when (page) {
+        1 -> Color.Green
+        2 -> Color.Red
+        3 -> Color.Blue
+        4 -> Color.Magenta
+        5 -> Color.LightGray
+        6 -> Color.Black
+        7 -> Color.Cyan
+        8 -> Color.Gray
         else -> Color.DarkGray
     }
 }

@@ -10,19 +10,19 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import java.text.SimpleDateFormat
-import java.util.Locale
+import androidx.compose.ui.platform.LocalContext
+import com.samir.composeonly.extensionfunction.millisecondsToDate
+import com.samir.composeonly.extensionfunction.showToast
 
 @Composable
-fun ShowDatePicker(modifier: Modifier = Modifier) {
+fun ShowDatePicker() {
     val selectedDate = remember { mutableStateOf("Select Date") }
     val showDatePicker = remember { mutableStateOf(false) }
 
 
     if (showDatePicker.value) {
         DatePickerModalExample({ date ->
-            selectedDate.value = "Select Date:: ${convertMillisToDate(date)}"
+            selectedDate.value = "Select Date:: ${date?.millisecondsToDate("dd-MM-yyyy")}"
         }, { showDatePicker.value = false })
     }
     Button(onClick = { showDatePicker.value = true }) {
@@ -37,13 +37,18 @@ fun DatePickerModalExample(
     onDateSelected: (Long?) -> Unit, onDismiss: () -> Unit
 ) {
 
+    val context = LocalContext.current
     val datePickerState = rememberDatePickerState()
     DatePickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = {
-                onDateSelected(datePickerState.selectedDateMillis)
-                onDismiss()
+                if (datePickerState.selectedDateMillis == null) {
+                    context.showToast("Please Select Date")
+                } else {
+                    onDateSelected(datePickerState.selectedDateMillis)
+                    onDismiss()
+                }
             }) {
                 Text("Confirm")
             }
@@ -52,15 +57,9 @@ fun DatePickerModalExample(
             TextButton(onClick = {
                 onDismiss()
             }) { Text("Cancel") }
-        },
-
-        ) {
+        }) {
 
         DatePicker(state = datePickerState)
     }
 }
 
-fun convertMillisToDate(millis: Long? = 0L): String {
-    val formatter = SimpleDateFormat("dd-mm-yyyy", Locale.getDefault())
-    return formatter.format(millis)
-}

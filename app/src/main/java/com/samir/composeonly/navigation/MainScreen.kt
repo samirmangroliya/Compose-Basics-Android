@@ -18,15 +18,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 
 @Composable
-fun MainScreen(navController: NavController, onClickItem:(Int)->Unit) {
+fun MainScreen(
+    onClickItem: (Int) -> Unit
+) {
     val pages = getPages()
+
     LazyColumn(
-        modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         itemsIndexed(pages) { index, name ->
@@ -38,15 +40,16 @@ fun MainScreen(navController: NavController, onClickItem:(Int)->Unit) {
     }
 }
 
+
 @Composable
-fun PageItem(index: Int, name: String, onClickItem:(Int) -> Unit) {
+fun PageItem(index: Int, name: String, onClickItem: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable(true, onClick = { onClickItem(index) }),
-        shape = RoundedCornerShape(8    .dp),
+        shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
