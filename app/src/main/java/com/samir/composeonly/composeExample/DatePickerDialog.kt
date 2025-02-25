@@ -1,8 +1,11 @@
 package com.samir.composeonly.composeExample
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -10,6 +13,8 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.samir.composeonly.extensionfunction.millisecondsToDate
 import com.samir.composeonly.extensionfunction.showToast
@@ -20,12 +25,16 @@ fun ShowDatePicker() {
     val showDatePicker = remember { mutableStateOf(false) }
 
 
+
     if (showDatePicker.value) {
         DatePickerModalExample({ date ->
             selectedDate.value = "Select Date:: ${date?.millisecondsToDate("dd-MM-yyyy")}"
         }, { showDatePicker.value = false })
     }
-    Button(onClick = { showDatePicker.value = true }) {
+    Button(
+        onClick = { showDatePicker.value = true },
+        modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally)
+    ) {
         Text(selectedDate.value)
     }
 }
@@ -38,7 +47,7 @@ fun DatePickerModalExample(
 ) {
 
     val context = LocalContext.current
-    val datePickerState = rememberDatePickerState()
+    val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Picker)
     DatePickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
