@@ -4,17 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.compose.rememberNavController
 import com.samir.composeonly.navigation.NavigationController
+import com.samir.composeonly.navigation.NavigationDrawerExample
+import com.samir.composeonly.navigation.NavigationIcons
+import com.samir.composeonly.navigation.ToolBarActions
 import com.samir.composeonly.ui.theme.ComposeAndroidOnlyTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,6 +45,9 @@ fun NavigationExample() {
 
     var canGoBack = remember { mutableStateOf(false) }
     val navController = rememberNavController()
+    var menuExpanded = remember { mutableStateOf(false) }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -62,24 +65,10 @@ fun NavigationExample() {
                     Text(title.value, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
-                    if (canGoBack.value) {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back Navigation"
-                            )
-                        }
-                    } else {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Menu"
-                            )
-                        }
-                    }
+                    NavigationIcons(canGoBack, navController, drawerState)
                 },
                 actions = {
-
+                    ToolBarActions(canGoBack, menuExpanded)
                 },
                 scrollBehavior = scrollBehavior
             )
@@ -87,6 +76,6 @@ fun NavigationExample() {
     ) { innerPadding ->
 
         NavigationController(innerPadding, canGoBack, navController, title)
-
+        NavigationDrawerExample(innerPadding, drawerState)
     }
 }

@@ -45,7 +45,6 @@ fun LazyListExample() {
             items(items = rowsList) { row ->
                 RowItem(row)
             }
-
         }
 
         Button(

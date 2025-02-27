@@ -13,7 +13,9 @@ import com.samir.composeonly.composeExample.ChipFlatRowExample
 import com.samir.composeonly.composeExample.DividerExample
 import com.samir.composeonly.composeExample.FloatingActionButtonExample
 import com.samir.composeonly.composeExample.HorizontalPagerExample
+import com.samir.composeonly.composeExample.LazyColumnContactListExample
 import com.samir.composeonly.composeExample.LazyHorizontalGridExample
+import com.samir.composeonly.composeExample.LazyListAnimationExample
 import com.samir.composeonly.composeExample.LazyListExample
 import com.samir.composeonly.composeExample.LazyStaggeredHorizontalGridExample
 import com.samir.composeonly.composeExample.LazyStaggeredVerticalGridExample
@@ -39,6 +41,8 @@ fun getPages(): List<String> {
         "Lazy Horizontal Grid Example",
         "Lazy Vertical Staggered Grid Example",
         "Lazy Horizontal Staggered Grid Example",
+        "Lazy List Animation Example",
+        "Lazy Column Contact List Example"
     )
 }
 
@@ -148,6 +152,14 @@ fun DetailsScreen(index: Int?) {
 
         15 -> {
             LazyStaggeredHorizontalGridExample()
+        }
+
+        16 -> {
+            LazyListAnimationExample()
+        }
+
+        17 -> {
+            LazyColumnContactListExample()
         }
     }
 }

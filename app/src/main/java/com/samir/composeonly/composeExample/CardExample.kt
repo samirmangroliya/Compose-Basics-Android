@@ -115,7 +115,7 @@ fun CardExample() {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.user_8801482),
+                        painter = painterResource(R.drawable.user_avatar),
                         contentDescription = "Profile",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
