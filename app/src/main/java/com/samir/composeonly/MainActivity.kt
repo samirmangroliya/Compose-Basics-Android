@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.compose.rememberNavController
-import com.samir.composeonly.navigation.NavigationController
 import com.samir.composeonly.navigation.NavigationDrawerExample
 import com.samir.composeonly.navigation.NavigationIcons
 import com.samir.composeonly.navigation.ToolBarActions
@@ -74,8 +73,6 @@ fun NavigationExample() {
             )
         },
     ) { innerPadding ->
-
-        NavigationController(innerPadding, canGoBack, navController, title)
-        NavigationDrawerExample(innerPadding, drawerState)
+        NavigationDrawerExample(innerPadding, drawerState, canGoBack, navController, title)
     }
 }

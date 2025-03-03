@@ -24,10 +24,12 @@ fun NavigationController(
 ) {
 
     DisposableEffect(navController) {
-        val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-            canGoBack.value = controller.previousBackStackEntry != null
-            title.value = getTopAppBarTitle(destination.route, arguments)
-        }
+        val listener =
+            NavController.OnDestinationChangedListener { controller, destination, arguments ->
+                var triple = getTopAppBarTitle(destination.route, arguments)
+                title.value = triple.first
+                canGoBack.value = triple.second
+            }
         navController.addOnDestinationChangedListener(listener)
         onDispose {
             navController.removeOnDestinationChangedListener(listener)
@@ -66,6 +68,19 @@ fun NavigationController(
         ) { navBackStackEntry ->
             val index = navBackStackEntry.arguments?.getInt(Screen.Details.args)
             DetailsScreen(index)
+        }
+
+        composable(route = Screen.Profile.route) {
+            ProfilePage()
+        }
+        composable(route = Screen.Setting.route) {
+            SettingsScreen()
+        }
+        composable(route = Screen.AboutUs.route) {
+            AboutUsPage()
+        }
+        composable(route = Screen.ContactUs.route) {
+            ContactUs()
         }
     }
 }

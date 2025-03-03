@@ -72,18 +72,26 @@ fun getPhotosList(): Array<String> {
     ))
 }
 
-fun getTopAppBarTitle(routeName: String?, bundle: Bundle?): String {
+fun getTopAppBarTitle(routeName: String?, bundle: Bundle?): Triple<String, Boolean, String> {
     Log.d("Test", routeName.toString())
     if (routeName == Main.route) {
-        return "Compose Example List"
+        return Triple("Compose Example List", false, "")
     } else if (routeName == Screen.Details.route + "/{${Screen.Details.args}}") {
         bundle?.apply {
             if (containsKey(Screen.Details.args)) {
-                return getPages()[bundle.getInt(Screen.Details.args)]
+                return Triple(getPages()[bundle.getInt(Screen.Details.args)], true, "")
             }
         }
+    } else if (routeName == Screen.AboutUs.route) {
+        return Triple("About Us", true, "")
+    } else if (routeName == Screen.Profile.route) {
+        return Triple("Profile", true, "")
+    } else if (routeName == Screen.Setting.route) {
+        return Triple("Setting", true, "")
+    } else if (routeName == Screen.ContactUs.route) {
+        return Triple("Contact Us", true, "")
     }
-    return ""
+    return Triple("Compose Example List", false, "")
 }
 
 @Composable
