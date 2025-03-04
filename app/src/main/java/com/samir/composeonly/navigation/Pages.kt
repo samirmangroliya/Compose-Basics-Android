@@ -31,6 +31,7 @@ import com.samir.composeonly.composeExample.ShowDatePicker
 import com.samir.composeonly.composeExample.SliderExample
 import com.samir.composeonly.composeExample.SnackBarExample
 import com.samir.composeonly.composeExample.SwitchBarExample
+import com.samir.composeonly.composeExample.TimePickerDialogExample
 import com.samir.composeonly.navigation.Screen.AboutUs
 import com.samir.composeonly.navigation.Screen.ContactUs
 import com.samir.composeonly.navigation.Screen.Details
@@ -66,7 +67,8 @@ fun getPages(): List<String> {
         "Segmented Button Example",
         "Slider Example",
         "SnackBar Example",
-        "Switch Example"
+        "Switch Example",
+        "Time Picker Example"
     )
 }
 
@@ -228,6 +230,10 @@ fun DetailsScreen(index: Int?) {
 
         26-> {
             SwitchBarExample()
+        }
+
+        27-> {
+            TimePickerDialogExample()
         }
     }
 }
