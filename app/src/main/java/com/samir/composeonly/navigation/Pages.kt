@@ -3,6 +3,7 @@ package com.samir.composeonly.navigation
 import android.os.Bundle
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import com.samir.composeonly.composeExample.AlertDialogExample
 import com.samir.composeonly.composeExample.BadgeExample
 import com.samir.composeonly.composeExample.BottomSheetExample
@@ -20,8 +21,19 @@ import com.samir.composeonly.composeExample.LazyListExample
 import com.samir.composeonly.composeExample.LazyStaggeredHorizontalGridExample
 import com.samir.composeonly.composeExample.LazyStaggeredVerticalGridExample
 import com.samir.composeonly.composeExample.LazyVerticalGridExample
+import com.samir.composeonly.composeExample.ProgressBarExample
+import com.samir.composeonly.composeExample.PullToRefreshExample
+import com.samir.composeonly.composeExample.RadioButtonExample
+import com.samir.composeonly.composeExample.ResourceExample
+import com.samir.composeonly.composeExample.ScapfoldExample
+import com.samir.composeonly.composeExample.SegmentedButtonExample
 import com.samir.composeonly.composeExample.ShowDatePicker
 import com.samir.composeonly.navigation.Screen.Main
+import com.samir.composeonly.navigation.Screen.AboutUs
+import com.samir.composeonly.navigation.Screen.ContactUs
+import com.samir.composeonly.navigation.Screen.Setting
+import com.samir.composeonly.navigation.Screen.Profile
+import com.samir.composeonly.navigation.Screen.Details
 
 fun getPages(): List<String> {
     return listOf(
@@ -42,7 +54,13 @@ fun getPages(): List<String> {
         "Lazy Vertical Staggered Grid Example",
         "Lazy Horizontal Staggered Grid Example",
         "Lazy List Animation Example",
-        "Lazy Column Contact List Example"
+        "Lazy Column Contact List Example",
+        "Progress indicators Example",
+        "Pull To Refresh Example",
+        "Radio Button Example",
+        "Resource Example",
+        "Scaffold Example",
+        "Segmented Example"
     )
 }
 
@@ -76,19 +94,19 @@ fun getTopAppBarTitle(routeName: String?, bundle: Bundle?): Triple<String, Boole
     Log.d("Test", routeName.toString())
     if (routeName == Main.route) {
         return Triple("Compose Example List", false, "")
-    } else if (routeName == Screen.Details.route + "/{${Screen.Details.args}}") {
+    } else if (routeName == Details.route + "/{${Details.args}}") {
         bundle?.apply {
-            if (containsKey(Screen.Details.args)) {
-                return Triple(getPages()[bundle.getInt(Screen.Details.args)], true, "")
+            if (containsKey(Details.args)) {
+                return Triple(getPages()[bundle.getInt(Details.args)], true, "")
             }
         }
-    } else if (routeName == Screen.AboutUs.route) {
+    } else if (routeName == AboutUs.route) {
         return Triple("About Us", true, "")
-    } else if (routeName == Screen.Profile.route) {
+    } else if (routeName == Profile.route) {
         return Triple("Profile", true, "")
-    } else if (routeName == Screen.Setting.route) {
+    } else if (routeName == Setting.route) {
         return Triple("Setting", true, "")
-    } else if (routeName == Screen.ContactUs.route) {
+    } else if (routeName == ContactUs.route) {
         return Triple("Contact Us", true, "")
     }
     return Triple("Compose Example List", false, "")
@@ -168,6 +186,43 @@ fun DetailsScreen(index: Int?) {
 
         17 -> {
             LazyColumnContactListExample()
+        }
+
+        18 -> {
+            ProgressBarExample()
+        }
+
+        19 -> {
+            PullToRefreshExample()
+        }
+
+        20 -> {
+            RadioButtonExample()
+        }
+
+        21 -> {
+            ResourceExample()
+        }
+
+        22-> {
+            ScapfoldExample()
+        }
+
+        23-> {
+            SegmentedButtonExample()
+        }
+    }
+}
+
+fun navDrawerNavigation(navController: NavHostController, index:Int){
+    when (index) {
+        1 -> navController.navigate(Main.route) { launchSingleTop = true }
+        2 -> navController.navigate(AboutUs.route)
+        3 -> navController.navigate(Setting.route)
+        4 -> navController.navigate(ContactUs.route)
+        5 -> navController.navigate(Profile.route)
+        else -> {
+            navController.navigate(Main.route)
         }
     }
 }

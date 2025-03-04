@@ -66,17 +66,7 @@ fun NavigationDrawerExample(
                         drawerState.close()
                     }
                 }
-                when (index) {
-                    1 -> navController.navigate(Screen.Main.route) { launchSingleTop = true }
-                    2 -> navController.navigate(Screen.AboutUs.route)
-                    3 -> navController.navigate(Screen.Setting.route)
-                    4 -> navController.navigate(Screen.ContactUs.route)
-                    5 -> navController.navigate(Screen.Profile.route)
-                    else -> {
-                        navController.navigate(Screen.Main.route)
-                    }
-                }
-
+                navDrawerNavigation(navController, index)
             }
         },
         modifier = Modifier,
@@ -103,8 +93,8 @@ fun ModalDrawer(modifier: Modifier, lastSelected: Int, onClickCloseMenu: (Int) -
                     .clip(RoundedCornerShape(16.dp))
                     .background(Color.LightGray)
                     .fillMaxWidth()
-                    .padding(12.dp)
                     .clickable(onClick = { onClickCloseMenu(5) })
+                    .padding(12.dp)
             ) {
                 Image(
                     modifier = Modifier.size(100.dp),
