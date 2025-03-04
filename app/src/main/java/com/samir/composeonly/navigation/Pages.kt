@@ -28,12 +28,15 @@ import com.samir.composeonly.composeExample.ResourceExample
 import com.samir.composeonly.composeExample.ScapfoldExample
 import com.samir.composeonly.composeExample.SegmentedButtonExample
 import com.samir.composeonly.composeExample.ShowDatePicker
-import com.samir.composeonly.navigation.Screen.Main
+import com.samir.composeonly.composeExample.SliderExample
+import com.samir.composeonly.composeExample.SnackBarExample
+import com.samir.composeonly.composeExample.SwitchBarExample
 import com.samir.composeonly.navigation.Screen.AboutUs
 import com.samir.composeonly.navigation.Screen.ContactUs
-import com.samir.composeonly.navigation.Screen.Setting
-import com.samir.composeonly.navigation.Screen.Profile
 import com.samir.composeonly.navigation.Screen.Details
+import com.samir.composeonly.navigation.Screen.Main
+import com.samir.composeonly.navigation.Screen.Profile
+import com.samir.composeonly.navigation.Screen.Setting
 
 fun getPages(): List<String> {
     return listOf(
@@ -60,7 +63,10 @@ fun getPages(): List<String> {
         "Radio Button Example",
         "Resource Example",
         "Scaffold Example",
-        "Segmented Example"
+        "Segmented Button Example",
+        "Slider Example",
+        "SnackBar Example",
+        "Switch Example"
     )
 }
 
@@ -210,6 +216,18 @@ fun DetailsScreen(index: Int?) {
 
         23-> {
             SegmentedButtonExample()
+        }
+
+        24-> {
+            SliderExample()
+        }
+
+        25-> {
+            SnackBarExample()
+        }
+
+        26-> {
+            SwitchBarExample()
         }
     }
 }
