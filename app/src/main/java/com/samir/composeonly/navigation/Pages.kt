@@ -12,6 +12,8 @@ import com.samir.composeonly.composeExample.CardExample
 import com.samir.composeonly.composeExample.CheckboxParentExample
 import com.samir.composeonly.composeExample.ChipFlatRowExample
 import com.samir.composeonly.composeExample.DividerExample
+import com.samir.composeonly.composeExample.DropDownExample
+import com.samir.composeonly.composeExample.EditTextExample
 import com.samir.composeonly.composeExample.FloatingActionButtonExample
 import com.samir.composeonly.composeExample.HorizontalPagerExample
 import com.samir.composeonly.composeExample.LazyColumnContactListExample
@@ -21,15 +23,18 @@ import com.samir.composeonly.composeExample.LazyListExample
 import com.samir.composeonly.composeExample.LazyStaggeredHorizontalGridExample
 import com.samir.composeonly.composeExample.LazyStaggeredVerticalGridExample
 import com.samir.composeonly.composeExample.LazyVerticalGridExample
+import com.samir.composeonly.composeExample.NavigationRailExample
 import com.samir.composeonly.composeExample.ProgressBarExample
 import com.samir.composeonly.composeExample.PullToRefreshExample
 import com.samir.composeonly.composeExample.RadioButtonExample
 import com.samir.composeonly.composeExample.ResourceExample
 import com.samir.composeonly.composeExample.ScapfoldExample
+import com.samir.composeonly.composeExample.SearchBarSample
 import com.samir.composeonly.composeExample.SegmentedButtonExample
 import com.samir.composeonly.composeExample.ShowDatePicker
 import com.samir.composeonly.composeExample.SliderExample
 import com.samir.composeonly.composeExample.SnackBarExample
+import com.samir.composeonly.composeExample.SwipeToDismissExample
 import com.samir.composeonly.composeExample.SwitchBarExample
 import com.samir.composeonly.composeExample.TimePickerDialogExample
 import com.samir.composeonly.navigation.Screen.AboutUs
@@ -68,7 +73,12 @@ fun getPages(): List<String> {
         "Slider Example",
         "SnackBar Example",
         "Switch Example",
-        "Time Picker Example"
+        "Time Picker Example",
+        "DropDown Example",
+        "SearchBar Example",
+        "SwipeToDismiss Example",
+        "Navigation Rail Example",
+        "EditText Example"
     )
 }
 
@@ -234,6 +244,26 @@ fun DetailsScreen(index: Int?) {
 
         27-> {
             TimePickerDialogExample()
+        }
+
+        28-> {
+            DropDownExample()
+        }
+
+        29-> {
+            SearchBarSample()
+        }
+
+        30-> {
+            SwipeToDismissExample()
+        }
+
+        31-> {
+            NavigationRailExample()
+        }
+
+        32 -> {
+            EditTextExample()
         }
     }
 }
