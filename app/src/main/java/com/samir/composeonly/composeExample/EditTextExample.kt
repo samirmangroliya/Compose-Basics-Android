@@ -82,7 +82,7 @@ fun EditTextExample() {
                 passwordValue.value = it
                 validatePassword(passwordValue, passwordError)
             },
-            placeholder = "Password (6 chars Long)",
+            placeholder = "Password",
             isError = passwordError.value.isNotBlank(),
             icon = Icons.Filled.Password,
             isPassword = true,
@@ -208,6 +208,9 @@ fun validateEmail(
     ) {
         emailError.value = ""
         return true
+    } else if (emailValue.value.isBlank()) {
+        emailError.value =
+            "Please Enter Email"
     } else {
         emailError.value = "Please Enter Valid Email"
     }
@@ -221,6 +224,9 @@ fun validatePassword(
     if (passwordValue.value.length > 6 && passwordValue.value.any { it.isDigit() } && passwordValue.value.any { it.isUpperCase() }) {
         passwordError.value = ""
         return true
+    } else if (passwordValue.value.isBlank()) {
+        passwordError.value =
+            "Please Enter Password"
     } else {
         passwordError.value =
             "Please Enter Valid Password. ( 6 chars long, One Number and One Capital letter)"

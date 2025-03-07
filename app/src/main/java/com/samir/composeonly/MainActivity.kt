@@ -67,7 +67,7 @@ fun NavigationExample() {
                     NavigationIcons(canGoBack, navController, drawerState)
                 },
                 actions = {
-                    ToolBarActions(canGoBack, menuExpanded)
+                    ToolBarActions(canGoBack, navController, menuExpanded)
                 },
                 scrollBehavior = scrollBehavior
             )
