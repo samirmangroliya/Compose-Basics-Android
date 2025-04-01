@@ -28,6 +28,7 @@ import com.samir.composeonly.composeExample.ProgressBarExample
 import com.samir.composeonly.composeExample.PullToRefreshExample
 import com.samir.composeonly.composeExample.RadioButtonExample
 import com.samir.composeonly.composeExample.ResourceExample
+import com.samir.composeonly.composeExample.RichUITextExample
 import com.samir.composeonly.composeExample.ScapfoldExample
 import com.samir.composeonly.composeExample.SearchBarSample
 import com.samir.composeonly.composeExample.SegmentedButtonExample
@@ -78,7 +79,8 @@ fun getPages(): List<String> {
         "SearchBar Example",
         "SwipeToDismiss Example",
         "Navigation Rail Example",
-        "EditText Example"
+        "EditText Example",
+        "Rich UI Text Example"
     )
 }
 
@@ -222,53 +224,57 @@ fun DetailsScreen(index: Int?) {
             ResourceExample()
         }
 
-        22-> {
+        22 -> {
             ScapfoldExample()
         }
 
-        23-> {
+        23 -> {
             SegmentedButtonExample()
         }
 
-        24-> {
+        24 -> {
             SliderExample()
         }
 
-        25-> {
+        25 -> {
             SnackBarExample()
         }
 
-        26-> {
+        26 -> {
             SwitchBarExample()
         }
 
-        27-> {
+        27 -> {
             TimePickerDialogExample()
         }
 
-        28-> {
+        28 -> {
             DropDownExample()
         }
 
-        29-> {
+        29 -> {
             SearchBarSample()
         }
 
-        30-> {
+        30 -> {
             SwipeToDismissExample()
         }
 
-        31-> {
+        31 -> {
             NavigationRailExample()
         }
 
         32 -> {
             EditTextExample()
         }
+
+        33 -> {
+            RichUITextExample()
+        }
     }
 }
 
-fun navDrawerNavigation(navController: NavHostController, index:Int){
+fun navDrawerNavigation(navController: NavHostController, index: Int) {
     when (index) {
         1 -> navController.navigate(Main.route) { launchSingleTop = true }
         2 -> navController.navigate(AboutUs.route)
